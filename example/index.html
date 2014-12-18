@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>HelloWorld Example</title>
+  <meta name="description" content="HelloWorld Example" />
+
+  <link href="index.css" rel="stylesheet" />
+
+  <script src="https://fb.me/react-with-addons-0.12.1.js"></script>
+  <script src="https://fb.me/JSXTransformer-0.12.1.js"></script>
+
+  <script src="HelloWorld.js"></script>
+
+</head>
+<body>
+
+  <h1>Example</h1>
+
+  <div id="helloWorldExample"></div>
+
+  <script type="text/jsx">
+    React.render(
+      <HelloWorld />,
+      document.getElementById('helloWorldExample')
+    );
+  </script>
+
+</body>
+</html>
