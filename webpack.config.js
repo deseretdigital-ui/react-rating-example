@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   output: {
-    filename: 'HelloWorld.js',
+    filename: 'RatingWidget.js',
     libraryTarget: 'umd'
   },
   module: {

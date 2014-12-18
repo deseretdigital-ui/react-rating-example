@@ -1,3 +1,1 @@
-# HelloWorld
-
-Put yer description here.
+# Rating Widget Example

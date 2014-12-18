@@ -1,9 +1,5 @@
 {
-  "name": "HelloWorld",
-  "homepage": "https://github.com/you/HelloWorld",
-  "authors": [
-    "You <you@helloworld.com"
-  ],
+  "name": "Rating Widget",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -15,7 +11,7 @@
     "gulpfile.js",
     "src"
   ],
-  "main": "dist/HelloWorld.js",
+  "main": "dist/RatingWidget.js",
   "dependencies": {
     "react": "~0.12.1"
   }

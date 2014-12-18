@@ -1,21 +1,12 @@
 {
-  "name": "HelloWorld",
+  "name": "RatingWidget",
   "version": "0.0.1",
-  "description": "Put yer description here.",
-  "main": "dist/HelloWorld.js",
+  "description": "Example Rating Widget.",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/you/HelloWorld.git"
-  },
-  "author": "you <you@helloworld.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/you/HelloWorld/issues"
-  },
-  "homepage": "https://github.com/you/HelloWorld",
   "devDependencies": {
     "autoprefixer-loader": "^1.0.0",
     "css-loader": "^0.9.0",
