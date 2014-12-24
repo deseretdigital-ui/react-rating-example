@@ -7,13 +7,15 @@ var RatingStep = React.createClass({
     type: React.PropTypes.oneOf(['whole', 'half', 'empty']),
     step: React.PropTypes.number.isRequired,
     temporaryRating: React.PropTypes.bool,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
+    onMouseMove: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       type: 'empty',
-      onClick: emptyFunction
+      onClick: emptyFunction,
+      onMouseMove: emptyFunction
     };
   },
 
