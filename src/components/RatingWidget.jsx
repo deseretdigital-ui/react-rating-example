@@ -1,14 +1,18 @@
 var React = require('react/addons');
 var RatingStep = require('./RatingStep');
 
+var emptyFunction = function() {};
+
 var RatingWidget = React.createClass({
   propTypes: {
-    size: React.PropTypes.number
+    size: React.PropTypes.number,
+    onRate: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      size: 5
+      size: 5,
+      onRate: emptyFunction
     }
   },
 
@@ -20,6 +24,7 @@ var RatingWidget = React.createClass({
 
   handleClick: function(newRating) {
     this.setState({rating: newRating});
+    this.props.onRate(newRating);
   },
 
   render: function() {

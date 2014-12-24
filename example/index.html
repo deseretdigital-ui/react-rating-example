@@ -23,8 +23,12 @@
   <div id="ratingWidget"></div>
 
   <script type="text/jsx">
+    function logRating(rating) {
+      console.log('You rated this widget ' + rating + ' stars!');
+    }
+
     React.render(
-      <RatingWidget size="10" />,
+      <RatingWidget size="10" onRate={logRating} />,
       document.getElementById('ratingWidget')
     );
   </script>
