@@ -16,8 +16,8 @@ var RatingStep = React.createClass({
     };
   },
 
-  handleClick: function() {
-    this.props.onClick(this.props.step);
+  handleClick: function(e) {
+    this.props.onClick(this.props.step, e);
   },
 
   render: function() {

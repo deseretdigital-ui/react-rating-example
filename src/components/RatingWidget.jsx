@@ -6,13 +6,15 @@ var emptyFunction = function() {};
 var RatingWidget = React.createClass({
   propTypes: {
     size: React.PropTypes.number,
-    onRate: React.PropTypes.func
+    onRate: React.PropTypes.func,
+    halfRatings: React.PropTypes.bool,
   },
 
   getDefaultProps: function() {
     return {
       size: 5,
-      onRate: emptyFunction
+      onRate: emptyFunction,
+      halfRatings: false
     }
   },
 
@@ -22,9 +24,33 @@ var RatingWidget = React.createClass({
     }
   },
 
-  handleClick: function(newRating) {
+  handleClick: function(newRating, e) {
+    newRating = this.calcHalfRating(newRating, e);
+    if (newRating === this.state.rating) {
+      newRating = 0;
+    }
+
     this.setState({rating: newRating});
     this.props.onRate(newRating);
+  },
+
+  calcHalfRating: function(newRating, e) {
+    if (!this.props.halfRatings) {
+      return newRating;
+    }
+
+    var stepClicked = e.target;
+    var stepWidth = stepClicked.offsetWidth;
+    var halfWidth = stepWidth / 2;
+
+    var stepClickedRect = stepClicked.getBoundingClientRect()
+    var clickPos = e.pageX - (stepClickedRect.left + document.body.scrollLeft);
+
+    if (clickPos <= halfWidth) {
+      newRating -= .5;
+    }
+
+    return newRating;
   },
 
   render: function() {
@@ -50,7 +76,8 @@ var RatingWidget = React.createClass({
         type = 'whole';
       } else if(
         roundRating == i &&
-        roundRating == ceilRating
+        roundRating == ceilRating &&
+        this.props.halfRatings
       ) {
         type = 'half';
       }
