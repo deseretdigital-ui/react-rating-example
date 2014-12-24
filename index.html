@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>Rating Widget Example</title>
+  <meta name="description" content="Rating Widget Example" />
+
+  <link href="index.css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-sham.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react-with-addons.js"></script>
+
+  <script src="RatingWidget.js"></script>
+
+  <style>
+    .custom-rating-widget .rating-widget__step:before {
+      color: darkorchid;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Example</h1>
+
+  <div id="ratingWidget"></div>
+  <p>
+    <input type="button" value="Disable" onClick="disableWidget();" />
+    <input type="button" value="Enable" onClick="enableWidget();" />
+  </p>
+
+  <script>
+    function logRating(rating) {
+      console.log('You rated this widget ' + rating + ' stars!');
+    }
+
+    function disableWidget() {
+      widgetRating.setProps({'disabled': true});
+    }
+
+    function enableWidget() {
+      widgetRating.setProps({'disabled': false});
+    }
+
+    var widgetRating = React.render(
+      React.createElement(RatingWidget, {
+        size: 10,
+        initialRating: 3.5,
+        className: "custom-rating-widget",
+        onRate: logRating,
+        halfRatings: true
+      }),
+      document.getElementById('ratingWidget')
+    );
+  </script>
+</body>
+</html>
