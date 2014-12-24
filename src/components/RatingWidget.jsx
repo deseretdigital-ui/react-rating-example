@@ -12,11 +12,22 @@ var RatingWidget = React.createClass({
     }
   },
 
+  getInitialState: function() {
+    return {
+      rating: 0
+    }
+  },
+
+  handleClick: function() {
+    var randomRating = Math.random() * this.props.size + 1;
+    this.setState({rating: randomRating});
+  },
+
   render: function() {
     var RatingSteps = this.renderRatingSteps();
 
     return (
-      <div className="rating-widget">
+      <div className="rating-widget" onClick={this.handleClick}>
         {RatingSteps}
       </div>
     );
@@ -24,7 +35,7 @@ var RatingWidget = React.createClass({
 
   renderRatingSteps: function() {
     var type, RatingSteps = [];
-    var rating = 4.5;
+    var rating = this.state.rating;
 
     var roundRating = Math.round(rating);
     var ceilRating = Math.ceil(rating);
