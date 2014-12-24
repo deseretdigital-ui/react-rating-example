@@ -26,8 +26,18 @@ var RatingStep = React.createClass({
   },
 
   render: function() {
+    // ie6-8
+    if (document.all && !document.addEventListener) {
+      return this.renderAsImg();
+    } else {
+      return this.renderAsCss();
+    }
+  },
+
+  renderAsCss: function() {
     var classes = {
       'rating-widget__step': true,
+      'rating-widget__step--css': true,
       'rating-widget__step--hover': this.props.temporaryRating
     }
     classes['rating-widget__step--' + this.props.type] = true;
@@ -38,6 +48,26 @@ var RatingStep = React.createClass({
         onClick={this.handleClick}
         onMouseMove={this.handleMouseMove}
       ></span>
+    );
+  },
+
+  renderAsImg: function() {
+    var hover = this.props.type !== 'empty' && this.props.temporaryRating ? '-hover': '';
+    var imgSrc = require('../images/star-' + this.props.type + hover + '.png');
+
+
+    var classes = {
+      'rating-widget__step': true,
+      'rating-widget__step--image': true,
+    }
+
+    return (
+      <img
+        src={imgSrc}
+        className={React.addons.classSet(classes)}
+        onClick={this.handleClick}
+        onMouseMove={this.handleMouseMove}
+      />
     );
   }
 });

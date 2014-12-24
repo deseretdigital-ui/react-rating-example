@@ -10,19 +10,13 @@
 
   <link href="index.css" rel="stylesheet" />
 
-  <script src="https://fb.me/react-with-addons-0.12.1.js"></script>
-  <script src="https://fb.me/JSXTransformer-0.12.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-sham.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react-with-addons.js"></script>
 
   <script src="RatingWidget.js"></script>
 
   <style>
-    .custom-rating-widget .rating-widget__step {
-      font-size: 24px;
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-    }
-
     .custom-rating-widget .rating-widget__step:before {
       color: darkorchid;
     }
@@ -38,7 +32,7 @@
     <input type="button" value="Enable" onClick="enableWidget();" />
   </p>
 
-  <script type="text/jsx">
+  <script>
     function logRating(rating) {
       console.log('You rated this widget ' + rating + ' stars!');
     }
@@ -52,13 +46,13 @@
     }
 
     var widgetRating = React.render(
-      <RatingWidget
-        size={10}
-        initialRating={3.5}
-        className="custom-rating-widget"
-        onRate={logRating}
-        halfRatings={true}
-      />,
+      React.createElement(RatingWidget, {
+        size: 10,
+        initialRating: 3.5,
+        className: "custom-rating-widget",
+        onRate: logRating,
+        halfRatings: true
+      }),
       document.getElementById('ratingWidget')
     );
   </script>

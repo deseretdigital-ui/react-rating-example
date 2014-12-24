@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var RatingStep = require('./RatingStep');
 
+var doesSupportTouchEvents = require('../utils/supportsTouchEvents');
 var emptyFunction = function() {};
 
 var RatingWidget = React.createClass({
@@ -49,7 +50,8 @@ var RatingWidget = React.createClass({
 
   handleOnMouseMove: function(newTempRating, e) {
     if (
-      this.props.disabled
+      doesSupportTouchEvents
+      || this.props.disabled
       || !this.props.hover
     ) {
       return;

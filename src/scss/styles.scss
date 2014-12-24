@@ -2,12 +2,19 @@ $stepDefault: #9F9F9F;
 $stepActive: #FA9E49;
 $stepHover: #2354ac;
 $stepSize: 16px;
+$stepSizeLarge: 27px;
 
 @mixin stepSize($size) {
   font-size: $size;
   width: $size;
   height: $size;
   line-height: $size;
+}
+
+@mixin smallScreen() {
+  @media (max-width: 736px)  {
+    @content;
+  }
 }
 
 .rating-widget {
@@ -26,6 +33,18 @@ $stepSize: 16px;
 
   @include stepSize($stepSize);
 
+  @include smallScreen() {
+    @include stepSize($stepSizeLarge);
+
+    margin-left: 10px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.rating-widget__step--css {
   &:before,
   &:after {
     position: absolute;
