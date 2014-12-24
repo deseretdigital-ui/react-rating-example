@@ -24,12 +24,20 @@ var RatingWidget = React.createClass({
 
   renderRatingSteps: function() {
     var type, RatingSteps = [];
-    var rating = 6;
+    var rating = 4.5;
+
+    var roundRating = Math.round(rating);
+    var ceilRating = Math.ceil(rating);
 
     for (var i = 1; i <= this.props.size; ++i) {
       type = 'empty';
       if (i <= rating) {
         type = 'whole';
+      } else if(
+        roundRating == i &&
+        roundRating == ceilRating
+      ) {
+        type = 'half';
       }
 
       RatingSteps.push(
