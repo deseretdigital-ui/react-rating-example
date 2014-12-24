@@ -6,6 +6,8 @@ var emptyFunction = function() {};
 var RatingWidget = React.createClass({
   propTypes: {
     size: React.PropTypes.number,
+    initialRating: React.PropTypes.number,
+    className: React.PropTypes.string,
     onRate: React.PropTypes.func,
     halfRatings: React.PropTypes.bool,
     hover: React.PropTypes.bool,
@@ -15,16 +17,18 @@ var RatingWidget = React.createClass({
   getDefaultProps: function() {
     return {
       size: 5,
+      initialRating: 0,
       onRate: emptyFunction,
       halfRatings: false,
       hover: true,
-      disabled: false
+      disabled: false,
+      className: ''
     }
   },
 
   getInitialState: function() {
     return {
-      rating: 0,
+      rating: this.props.initialRating,
       tempRating: null
     }
   },
@@ -84,10 +88,11 @@ var RatingWidget = React.createClass({
       'rating-widget': true,
       'rating-widget--disabled': this.props.disabled
     }
+    classes = React.addons.classSet(classes) + ' ' + this.props.className;
 
     return (
       <div
-        className={React.addons.classSet(classes)}
+        className={classes}
         onMouseLeave={this.handleOnMouseLeave}
       >
         {RatingSteps}

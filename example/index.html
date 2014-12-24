@@ -15,6 +15,18 @@
 
   <script src="RatingWidget.js"></script>
 
+  <style>
+    .custom-rating-widget .rating-widget__step {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+    }
+
+    .custom-rating-widget .rating-widget__step:before {
+      color: darkorchid;
+    }
+  </style>
 </head>
 <body>
 
@@ -40,7 +52,13 @@
     }
 
     var widgetRating = React.render(
-      <RatingWidget size={10} onRate={logRating} halfRatings={true} />,
+      <RatingWidget
+        size={10}
+        initialRating={3.5}
+        className="custom-rating-widget"
+        onRate={logRating}
+        halfRatings={true}
+      />,
       document.getElementById('ratingWidget')
     );
   </script>
