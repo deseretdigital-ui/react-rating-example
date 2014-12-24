@@ -23,11 +23,17 @@ var RatingWidget = React.createClass({
   },
 
   renderRatingSteps: function() {
-    var RatingSteps = [];
+    var type, RatingSteps = [];
+    var rating = 6;
 
     for (var i = 1; i <= this.props.size; ++i) {
+      type = 'empty';
+      if (i <= rating) {
+        type = 'whole';
+      }
+
       RatingSteps.push(
-        <RatingStep type="empty" />
+        <RatingStep type={type} />
       );
     }
 
