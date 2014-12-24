@@ -24,7 +24,11 @@
 
   <script type="text/jsx">
     React.render(
-      <RatingStep />,
+      <div>
+        <RatingStep type="whole" />
+        <RatingStep type="half" />
+        <RatingStep type="empty" />
+      </div>,
       document.getElementById('ratingWidget')
     );
   </script>

@@ -2,8 +2,13 @@ var React = require('react/addons');
 
 var RatingStep = React.createClass({
   render: function() {
+    var classes = {
+      'rating-widget__step': true
+    }
+    classes['rating-widget__step--' + this.props.type] = true;
+
     return (
-      <span className="rating-widget__step rating-widget__step--half"></span>
+      <span className={React.addons.classSet(classes)}></span>
     );
   }
 });
