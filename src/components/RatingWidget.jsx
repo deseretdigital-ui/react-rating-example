@@ -8,19 +8,22 @@ var RatingWidget = React.createClass({
     size: React.PropTypes.number,
     onRate: React.PropTypes.func,
     halfRatings: React.PropTypes.bool,
+    hover: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       size: 5,
       onRate: emptyFunction,
-      halfRatings: false
+      halfRatings: false,
+      hover: true
     }
   },
 
   getInitialState: function() {
     return {
-      rating: 0
+      rating: 0,
+      tempRating: null
     }
   },
 
@@ -30,8 +33,21 @@ var RatingWidget = React.createClass({
       newRating = 0;
     }
 
-    this.setState({rating: newRating});
+    this.setState({rating: newRating, tempRating: null});
     this.props.onRate(newRating);
+  },
+
+  handleOnMouseMove: function(newTempRating, e) {
+    if (!this.props.hover) {
+      return;
+    }
+
+    newTempRating = this.calcHalfRating(newTempRating, e);
+    this.setState({tempRating: newTempRating})
+  },
+
+  handleOnMouseLeave: function() {
+    this.setState({tempRating: null});
   },
 
   calcHalfRating: function(newRating, e) {
@@ -57,7 +73,7 @@ var RatingWidget = React.createClass({
     var RatingSteps = this.renderRatingSteps();
 
     return (
-      <div className="rating-widget">
+      <div className="rating-widget" onMouseLeave={this.handleOnMouseLeave}>
         {RatingSteps}
       </div>
     );
@@ -65,7 +81,7 @@ var RatingWidget = React.createClass({
 
   renderRatingSteps: function() {
     var type, RatingSteps = [];
-    var rating = this.state.rating;
+    var rating = this.state.tempRating || this.state.rating;
 
     var roundRating = Math.round(rating);
     var ceilRating = Math.ceil(rating);
@@ -86,7 +102,9 @@ var RatingWidget = React.createClass({
         <RatingStep
           step={i}
           type={type}
+          temporaryRating={this.state.tempRating !== null}
           onClick={this.handleClick}
+          onMouseMove={this.handleOnMouseMove}
           key={"rating-step-" + i}
         />
       );
