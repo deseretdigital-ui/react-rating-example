@@ -21,13 +21,25 @@
   <h1>Example</h1>
 
   <div id="ratingWidget"></div>
+  <p>
+    <input type="button" value="Disable" onClick="disableWidget();" />
+    <input type="button" value="Enable" onClick="enableWidget();" />
+  </p>
 
   <script type="text/jsx">
     function logRating(rating) {
       console.log('You rated this widget ' + rating + ' stars!');
     }
 
-    React.render(
+    function disableWidget() {
+      widgetRating.setProps({'disabled': true});
+    }
+
+    function enableWidget() {
+      widgetRating.setProps({'disabled': false});
+    }
+
+    var widgetRating = React.render(
       <RatingWidget size={10} onRate={logRating} halfRatings={true} />,
       document.getElementById('ratingWidget')
     );

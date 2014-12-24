@@ -8,7 +8,8 @@ var RatingWidget = React.createClass({
     size: React.PropTypes.number,
     onRate: React.PropTypes.func,
     halfRatings: React.PropTypes.bool,
-    hover: React.PropTypes.bool
+    hover: React.PropTypes.bool,
+    disabled: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -16,7 +17,8 @@ var RatingWidget = React.createClass({
       size: 5,
       onRate: emptyFunction,
       halfRatings: false,
-      hover: true
+      hover: true,
+      disabled: false
     }
   },
 
@@ -28,6 +30,10 @@ var RatingWidget = React.createClass({
   },
 
   handleClick: function(newRating, e) {
+    if (this.props.disabled) {
+      return;
+    }
+
     newRating = this.calcHalfRating(newRating, e);
     if (newRating === this.state.rating) {
       newRating = 0;
@@ -38,7 +44,10 @@ var RatingWidget = React.createClass({
   },
 
   handleOnMouseMove: function(newTempRating, e) {
-    if (!this.props.hover) {
+    if (
+      this.props.disabled
+      || !this.props.hover
+    ) {
       return;
     }
 
@@ -71,9 +80,16 @@ var RatingWidget = React.createClass({
 
   render: function() {
     var RatingSteps = this.renderRatingSteps();
+    var classes = {
+      'rating-widget': true,
+      'rating-widget--disabled': this.props.disabled
+    }
 
     return (
-      <div className="rating-widget" onMouseLeave={this.handleOnMouseLeave}>
+      <div
+        className={React.addons.classSet(classes)}
+        onMouseLeave={this.handleOnMouseLeave}
+      >
         {RatingSteps}
       </div>
     );
